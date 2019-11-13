@@ -3,7 +3,7 @@ from enviroment import Environment
 
 class SimpleReflexAgent(Environment):
 
-    def __init__(self, Environment):
+    def __init__(self, Environment, cycles=1000):
 
         # Gets the size of the environment
         self.size = Environment.getSize
@@ -13,6 +13,9 @@ class SimpleReflexAgent(Environment):
         
         # Performance Score
         self.score = 0
+
+        # Number of cycles left on vacuum
+        self.cyclesLeft = cycles
         
         # Randomized starting vacuum location based on size 
         self.vacuumLocation = [r.randint(0,size[0]), r.randint(0,size[1])]
@@ -39,6 +42,16 @@ class SimpleReflexAgent(Environment):
             if self.vacuumLocation[1] > 1:
                 self.vacuumLocation[1] -= 1
 
+    def suck(self):
+        self.dirtEnv[self.vacuumLocation[0]][self.vacuumLocation[1]]
+        self.score += 1
+
+
+    def runVacuum(self):
+        while(self.cyclesLeft != 0):
+
+
+            self.cyclesLeft -= 1
 
 
 
