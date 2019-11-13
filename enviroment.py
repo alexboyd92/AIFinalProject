@@ -13,6 +13,7 @@ class environment:
     def getSize(self):
         return self.size
 
+    #TODO: Fix to add walls to outer parts of map
     def setShape(self, walls):
         pass
         if walls:
@@ -32,10 +33,3 @@ class environment:
 
     def print_shape(self):
         print(self.enviro)
-        
-
-
-
-env = environment()
-
-env.print_shape()
