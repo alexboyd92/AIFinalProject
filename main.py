@@ -1,7 +1,6 @@
-from enviroment import environment
-from agent import simpleReflexAgent
+from enviroment import Environment
+from agent import SimpleReflexAgent
 
-
-env = environment()
-
-env.print_shape()
+env = Enviroment()
+env.print
+vacuum = SimpleReflexAgent(env)
