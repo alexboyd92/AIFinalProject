@@ -6,8 +6,7 @@ class SimpleReflexAgent(Environment):
     def __init__(self, Environment, cycles=1000):
 
         # Gets the size of the environment
-        self.size = Environment.getSize
-
+        #self.size = Environment.getSize
         # Gets the dirt placement map
         self.dirtEnv = Environment.enviro
         
@@ -18,7 +17,7 @@ class SimpleReflexAgent(Environment):
         self.cyclesLeft = cycles
         
         # Randomized starting vacuum location based on size 
-        self.vacuumLocation = [r.randint(0,size[0]), r.randint(0,size[1])]
+        self.vacuumLocation = [r.randint(0,Environment.size[0]), r.randint(0,Environment.size[1])]
 
     def moveAgent(self, direction):
         
@@ -29,12 +28,12 @@ class SimpleReflexAgent(Environment):
         
         # moves the agent to the right one position
         elif direction == 1:
-            if self.vacuumLocation[1] < self.size[1]:
+            if self.vacuumLocation[1] < Environment.size[1]:
                 self.vacuumLocation[1] += 1
         
         # moves the agent down one position
         elif direction == 2:
-            if self.vacuumLocation[0] < self.size[0]:
+            if self.vacuumLocation[0] < Environment.size[0]:
                 self.vacuumLocation[0] += 1
         
         # moves the agent left one position
