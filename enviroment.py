@@ -4,29 +4,36 @@ import random
 
 
 class environment:
-    def __init__(self, x=1, y=2, walls=0):
+    def __init__(self, x=1, y=2, walls=False):
         self.enviro = []
-        self.x = 0
-        self.y = 0
-        self._setSize(x,y)
-        self._setShape(walls)
-        self._setDirt()
+        self.size = [x, y]
+        self.setShape(walls)
+        self.setDirt()
 
-        
-    def _setSize(self,x=1, y=2):
-        self.x = x
-        self.y = y
+    def getSize(self):
+        return self.size
 
-    def _setShape(self, walls=0):  
-        pass 
+    def setShape(self, walls):
+        pass
+        if walls:
+            # if area is or greater than 16 units (x=4,y=4) than walls can be set up
+            # 2 = wall at location
+            if self.size[0] * self.size[1] >= 16:
+                self.enviro[:,0] = 2
+                self.enviro[:,-1] = 2
+                self.enviro[0] = 2
+                self.enviro[-1] = 2
+                
     
-    def _setDirt(self):
+    def setDirt(self):
         # sets dirt placement (1 = dirt at that location), randomized
-        self.enviro = np.floor(2*np.random.random((self.x,self.y)))
+        # self.enviro = np.floor(2*np.random.random((self.size[0],self.size[1])))
+        self.enviro = np.random.randint(0, 2, size=(self.size[0],self.size[1]))
 
     def print_shape(self):
         print(self.enviro)
         
+
 
 
 env = environment()
