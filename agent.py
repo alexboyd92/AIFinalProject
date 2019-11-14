@@ -42,7 +42,7 @@ class SimpleReflexAgent(Environment):
                 self.vacuumLocation[1] -= 1
 
     def suck(self):
-        self.dirtEnv[self.vacuumLocation[0]][self.vacuumLocation[1]]
+        self.dirtEnv[self.vacuumLocation[0]][self.vacuumLocation[1]] = 0
         self.score += 1
 
 
