@@ -1,5 +1,6 @@
 import random as r
 from enviroment import Environment
+import numpy as np
 
 class SimpleReflexAgent(Environment):
 
@@ -24,7 +25,8 @@ class SimpleReflexAgent(Environment):
         print(self.vacuumLocation)
 
     def moveAgent(self, direction):
-        
+        # 0=up, 1=right, 2=down, 3=left
+
         # moves the agent up one position on the map
         if direction == 0:
             if self.vacuumLocation[0] > 0:
@@ -56,13 +58,18 @@ class SimpleReflexAgent(Environment):
 
     def suck(self):
         self.dirtEnv[self.vacuumLocation[0]][self.vacuumLocation[1]] = 0
-        self.score += 1
 
     def agentAction(self):
         if self.dirtEnv[self.vacuumLocation[0]][self.vacuumLocation[1]] == 1:
             self.suck()
+            #dirtyTiles = np.count_nonzero(self.dirtEnv == 1)
+            cleanTiles = len(np.where(self.dirtEnv == 0))
+            
+            # Adds the number of clean tiles at that point in time to the score
+            self.score += cleanTiles
         else:
             self.moveAgent(1)
+            self.score -= 1
 
 
     def runVacuum(self):
