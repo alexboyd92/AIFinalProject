@@ -7,7 +7,7 @@ class Environment:
     def __init__(self, x=1, y=2, walls=False):
         self.enviro = []
         self.size = [x, y]
-        self.setShape(walls)
+        #self.setShape(walls)
         self.setDirt()
 
     def getSize(self):
