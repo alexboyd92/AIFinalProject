@@ -83,6 +83,10 @@ class SimpleReflexAgent(Environment):
         print(self.score)
 
 
+class ReflexAgentWithState(Environment):
+    def __init__(self, Environment):
+        pass
+
 
 
 
