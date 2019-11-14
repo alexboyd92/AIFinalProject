@@ -45,12 +45,21 @@ class SimpleReflexAgent(Environment):
         self.dirtEnv[self.vacuumLocation[0]][self.vacuumLocation[1]] = 0
         self.score += 1
 
+    def agentAction(self):
+        if self.dirtEnv[self.vacuumLocation[0]][self.vacuumLocation[1]] == 1:
+            self.suck()
+        else:
+            self.moveAgent(r.randint(0,3))
+
 
     def runVacuum(self):
         while(self.cyclesLeft != 0):
 
-
+            self.agentAction()
+            print(self.dirtEnv)
             self.cyclesLeft -= 1
+        
+        print(self.score)
 
 
 
