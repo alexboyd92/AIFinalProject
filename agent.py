@@ -23,7 +23,7 @@ class SimpleReflexAgent(Environment):
         # Randomized starting vacuum location based on size 
         self.vacuumStartLocation = [r.randint(0,self.size[0]-1), r.randint(0,self.size[1]-1)]
         self.vacuumLocation = self.vacuumStartLocation
-        print(self.vacuumLocation)
+        #print(self.vacuumLocation)
 
     def setStartingLocation(self, x, y):
         self.vacuumStartLocation = [x, y]
@@ -87,7 +87,8 @@ class SimpleReflexAgent(Environment):
             #print(self.dirtEnv)
             self.cyclesLeft -= 1
         
-        print(self.score)
+        #print(self.score)
+        return self.score
 
 
 class ReflexAgentWithState(Environment):
