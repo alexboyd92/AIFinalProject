@@ -21,7 +21,8 @@ class SimpleReflexAgent(Environment):
         self.cyclesLeft = cycles
         
         # Randomized starting vacuum location based on size 
-        self.vacuumLocation = [r.randint(0,self.size[0]-1), r.randint(0,self.size[1]-1)]
+        self.vacuumStartLocation = [r.randint(0,self.size[0]-1), r.randint(0,self.size[1]-1)]
+        self.vacuumLocation = self.vacuumStartLocation
         print(self.vacuumLocation)
 
     def moveAgent(self, direction):
