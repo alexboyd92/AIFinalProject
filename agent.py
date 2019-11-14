@@ -68,13 +68,16 @@ class SimpleReflexAgent(Environment):
         if self.dirtEnv[self.vacuumLocation[0]][self.vacuumLocation[1]] == 1:
             self.suck()
             #dirtyTiles = np.count_nonzero(self.dirtEnv == 1)
-            cleanTiles = len(np.where(self.dirtEnv == 0))
             
-            # Adds the number of clean tiles at that point in time to the score
-            self.score += cleanTiles
+            
+            
         else:
             self.moveAgent(1)
             self.score -= 1
+
+        cleanTiles = len(np.where(self.dirtEnv == 0))
+        # Adds the number of clean tiles at that point in time to the score
+        self.score += cleanTiles
 
 
     def runVacuum(self):
