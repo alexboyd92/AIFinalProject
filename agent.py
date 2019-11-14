@@ -69,7 +69,7 @@ class SimpleReflexAgent(Environment):
         while(self.cyclesLeft != 0):
 
             self.agentAction()
-            print(self.dirtEnv)
+            #print(self.dirtEnv)
             self.cyclesLeft -= 1
         
         print(self.score)
