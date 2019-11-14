@@ -25,6 +25,10 @@ class SimpleReflexAgent(Environment):
         self.vacuumLocation = self.vacuumStartLocation
         print(self.vacuumLocation)
 
+    def setStartingLocation(self, x, y):
+        self.vacuumStartLocation = [x, y]
+        self.vacuumLocation = self.vacuumStartLocation
+
     def moveAgent(self, direction):
         # 0=up, 1=right, 2=down, 3=left
 
