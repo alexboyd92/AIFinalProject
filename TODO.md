@@ -18,5 +18,5 @@ Show your results.
 
 
 
-Reflex agent with state
-Reflex agent with state and randomized movement
+	*Reflex agent with state
+	*Reflex agent with state and randomized movement
