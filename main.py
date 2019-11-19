@@ -27,12 +27,11 @@ except:
 if agentSel ==1:
     scores = []
     x,y = getUserSizeInput()
-    #randomLocations = setRandomLocations()
-    randomLocations = True
+    randomLocations = setRandomLocations()
     if randomLocations == True:
           # Gets all permutations of matrix
         for m in islice(get_combinations(x, y), None):
-            #print(m) 
+            #print(m)
             for i in range(x):
                 for j in range(y):
                     #print(i,j)
@@ -40,7 +39,6 @@ if agentSel ==1:
                     vacuum = SimpleReflexAgent(env)
                     vacuum.setStartingLocation(i, j)
                     scores.append(vacuum.runVacuum())
-    
     else:
         env = Environment(x, y)
         print('Environment:')
@@ -48,7 +46,8 @@ if agentSel ==1:
         print('Initial Location:', end=' ')
         vacuum = SimpleReflexAgent(env)
         print('Vacuum Start:\n')
-        vacuum.runVacuum()
+        score =vacuum.runVacuum()
+
 
 
 else:
@@ -75,18 +74,6 @@ else:
 
 
 
-#print(scores)
+print(scores)
 print('Iterations:', len(scores))
 print('Average: {:.2f}'.format(sum(scores)/len(scores)))
-
-
-
-
-
-
-
-
-
-
-
-
