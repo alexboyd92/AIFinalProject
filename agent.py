@@ -131,14 +131,14 @@ class ReflexAgentWithState(Environment):
         return dirtPresent
 
     def agentAction(self):
-        if dirtPresent == True:
+        if dirtSensor(self.agentLocation) == True:
             vacuumSuck()
         pass
 
-    def vacuumSuck(self, dirtPresent):
-        
+    def vacuumSuck(self):
+        dirtPresent = False
+    
         pass
-
 
 
 # start (0,0) -> go down, if down is wall or node coordinates are (-1,-1) --- go diff direction AND check the same condition
