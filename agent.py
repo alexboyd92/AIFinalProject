@@ -3,6 +3,8 @@ from enviroment import Environment
 import numpy as np
 import nodes
 
+
+
 class SimpleReflexAgent(Environment):
 
     def __init__(self, Environment, cycles=1000):
@@ -85,19 +87,49 @@ class SimpleReflexAgent(Environment):
             #print(self.dirtEnv)
             self.cyclesLeft -= 1
         
-        #print(self.score)
-        return self.score
+        #print(self.score
+class RelfexAgentWithRand(Environment):
+    self.tilesClean=0;
+    self.model = []
+    self.path = []
+    self.rules = []
+    self.lastAction = None
+    self.agentLocation = Environment.locationSensor()
+    self.score = 0
+    def moveAgent(self):
+        
+    def agentAction(self):
+          if self.dirtEnv[self.vacuumLocation[0]][self.vacuumLocation[1]] == 1:
+                self.suck()
+            self.tilesClean += 1
+        else:
+            self.moveAgent(1)
+            self.score -= 1
+        self.score+=tilesClean
+    def runVacum(self):
+         while(self.cyclesLeft != 0):
+    
+            self.agentAction()
+            #print(self.dirtEnv)
+            self.cyclesLeft -= 1
+
+
+    
+
+
 
 
 class ReflexAgentWithState(Environment):
      
-    def __init__(self, Environment):
+    def __init__(self, Evironment, cycles=1000):
+        self.state = []
         self.state = []
         self.model = []
-        self.path = []
         self.rules = []
         self.lastAction = None
-        self.agentLocation = Environment.locationSensor()
+        self.lastAction = None
+        self.lastAction = None
+        self.agentLocation = [0,0]
         self.score = 0
 
     def locationSensor(self):
