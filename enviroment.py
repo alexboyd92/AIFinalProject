@@ -37,7 +37,6 @@ class Environment:
     
     def setDirt(self):
         # sets dirt placement (1 = dirt at that location), randomized
-        # self.enviro = np.floor(2*np.random.random((self.size[0],self.size[1])))
         self.enviro = np.random.randint(0, 2, size=(self.size[0],self.size[1]))
 
     def print_shape(self):

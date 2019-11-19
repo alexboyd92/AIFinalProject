@@ -1,7 +1,8 @@
 import random as r
 from enviroment import Environment
 import numpy as np
-import linked_list
+import nodes
+
 class SimpleReflexAgent(Environment):
 
     def __init__(self, Environment, cycles=1000):
@@ -89,11 +90,11 @@ class SimpleReflexAgent(Environment):
 
 
 class ReflexAgentWithState(Environment):
-    list = LinkedList()
      
     def __init__(self, Environment):
         self.state = []
         self.model = []
+        self.path = []
         self.rules = []
         self.lastAction = None
         self.agentLocation = [0,0]
@@ -102,6 +103,7 @@ class ReflexAgentWithState(Environment):
         sensorLocationSize = 1
         tempMap = Environment.enviro
         tempCurrent = tempMap[self.agentLocation[0]][self.agentLocation[1]]
+
         try:
             tempUp = tempMap[self.agentLocation[0]-1][self.agentLocation[1]]
         except:
@@ -120,12 +122,23 @@ class ReflexAgentWithState(Environment):
             tempLeft = None
         
         
-    def dirtSensor(self):
-        sensorDirtSize = 0
+    #checks if dirt is present at current location
+    def dirtSensor(self, location):
         dirtPresent = False
-        if sensorDirtSize == 0:
-            
+        # checks enviroment map if dirt is equal to 1 
+        if Enviroment.enviro[location[0]][location[1]] == 1:
+            dirtPresent = True
         return dirtPresent
+
+    def agentAction(self):
+        if dirtPresent == True:
+            vacuumSuck()
+        pass
+
+    def vacuumSuck(self, dirtPresent):
+        
+        pass
+
 
 
 # start (0,0) -> go down, if down is wall or node coordinates are (-1,-1) --- go diff direction AND check the same condition
