@@ -34,6 +34,8 @@ class Environment:
                 
     def setEnviro(self, m):
         self.enviro = m
+        self.size[0] = len(m)
+        self.size[1] = len(m[0])
     
     def setDirt(self):
         # sets dirt placement (1 = dirt at that location), randomized
@@ -42,3 +44,7 @@ class Environment:
     def print_shape(self):
         print(self.enviro)
 
+    def pickStartingLocation(self, enviro):
+        xStart = random.randint(0,self.size[0])
+        yStart = random.randint(0,self.size[1])
+    
