@@ -48,8 +48,8 @@ else:
     vacuum.runVacuum()
 
 print(scores)
-print(len(scores))
-print('Average:', sum(scores)/len(scores))
+print('Iterations:', len(scores))
+print('Average: {:.2f}'.format(sum(scores)/len(scores)))
 
 
 

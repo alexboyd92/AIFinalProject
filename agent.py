@@ -67,10 +67,7 @@ class SimpleReflexAgent(Environment):
     def agentAction(self):
         if self.dirtEnv[self.vacuumLocation[0]][self.vacuumLocation[1]] == 1:
             self.suck()
-            #dirtyTiles = np.count_nonzero(self.dirtEnv == 1)
-            
-            
-            
+            self.score += 1
         else:
             self.moveAgent(1)
             self.score -= 1
@@ -93,7 +90,11 @@ class SimpleReflexAgent(Environment):
 
 class ReflexAgentWithState(Environment):
     def __init__(self, Environment):
-        pass
+        self.state = None
+        self.model = []
+        self.rules = []
+        self.lastAction = None
+
 
 
 

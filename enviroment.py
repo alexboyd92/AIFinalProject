@@ -4,23 +4,13 @@ import random
 
 
 class Environment:
-    def __init__(self, x=1, y=2, walls=False, enviro=[]):
+    def __init__(self, x=1, y=2, enviro=[]):
         self.enviro = enviro
         self.size = [x, y]
-        self.setShape(walls)
         self.setDirt()
 
     def getSize(self):
         return self.size
-
-    # No method needed for Walls: [walls - true] -> (2*x +2*y - 4) is the amount of walls / [wall - false] -> original perimeter 
-    #TODO: Fix to add walls to outer parts of map
-    def setShape(self, walls):
-        if walls:
-            for i in range(x):
-                for j in range(y):
-                    if i == 0 or i == x-1 or j == 0 or j == y-1:
-                        self.enviro[i][j] = 2
                 
     def setEnviro(m):
         self.enviro = m
