@@ -3,6 +3,26 @@ import numpy as np
 import random
 
 
+MAP2 = np.array([
+    [0,2,0,2,2,2,2,2,2,0],
+    [0,0,0,0,0,0,0,0,2,0],
+    [0,1,1,0,2,2,2,0,2,0],
+    [2,2,2,2,0,1,0,1,0,0]
+])
+MAP1 = np.array([
+    [0,0,0,2],
+    [0,0,0,0],
+    [0,1,1,0],
+    [2,2,2,2]
+])
+MAP3 = np.array([
+    [0,2,2,1],
+    [0,2,0,1],
+    [0,1,0,2],
+    [2,1,1,2],
+    [2,2,0,0]
+])
+
 class Environment:
     def __init__(self, x=1, y=2, enviro=[]):
         self.enviro = enviro
@@ -12,7 +32,7 @@ class Environment:
     def getSize(self):
         return self.size
                 
-    def setEnviro(m):
+    def setEnviro(self, m):
         self.enviro = m
     
     def setDirt(self):
@@ -22,3 +42,4 @@ class Environment:
 
     def print_shape(self):
         print(self.enviro)
+

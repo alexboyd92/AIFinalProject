@@ -29,10 +29,10 @@ randomLocations = setRandomLocations()
 if randomLocations == True:
     # Gets all permutations of matrix
     for m in islice(get_combinations(x, y), None):
-        print(m) 
+        #print(m) 
         for i in range(x):
             for j in range(y):
-                print(i,j)
+                #print(i,j)
                 env = Environment(x, y, enviro=m)
                 vacuum = SimpleReflexAgent(env)
                 vacuum.setStartingLocation(i, j)
@@ -47,7 +47,7 @@ else:
     print('Vacuum Start:\n')
     vacuum.runVacuum()
 
-print(scores)
+#print(scores)
 print('Iterations:', len(scores))
 print('Average: {:.2f}'.format(sum(scores)/len(scores)))
 

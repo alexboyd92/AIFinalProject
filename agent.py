@@ -1,7 +1,7 @@
 import random as r
 from enviroment import Environment
 import numpy as np
-
+import linked_list
 class SimpleReflexAgent(Environment):
 
     def __init__(self, Environment, cycles=1000):
@@ -89,15 +89,53 @@ class SimpleReflexAgent(Environment):
 
 
 class ReflexAgentWithState(Environment):
+    list = LinkedList()
+     
     def __init__(self, Environment):
-        self.state = None
+        self.state = []
         self.model = []
         self.rules = []
         self.lastAction = None
+        self.agentLocation = [0,0]
+
+    def locationSensor(self):
+        sensorLocationSize = 1
+        tempMap = Environment.enviro
+        tempCurrent = tempMap[self.agentLocation[0]][self.agentLocation[1]]
+        try:
+            tempUp = tempMap[self.agentLocation[0]-1][self.agentLocation[1]]
+        except:
+            tempUp = None
+        try:
+            tempRight = tempMap[self.agentLocation[0]][self.agentLocation[1]+1]
+        except:
+            tempRight = None
+        try:
+            tempDown = tempMap[self.agentLocation[0]+1][self.agentLocation[1]]
+        except:
+            tempDown = None
+        try:
+            tempLeft = tempMap[self.agentLocation[0]][self.agentLocation[1]-1]
+        except:
+            tempLeft = None
+        
+        
+    def dirtSensor(self):
+        sensorDirtSize = 0
+        dirtPresent = False
+        if sensorDirtSize == 0:
+            
+        return dirtPresent
 
 
-
-
+# start (0,0) -> go down, if down is wall or node coordinates are (-1,-1) --- go diff direction AND check the same condition
+# def functionFUNCTIONfunction(self):
+#   pos = [0,0]
+#   existsList[0]= (x=0,y=0)
+#   ####since 0,0 you can only go positive so you either go down or right
+#   # go right
+#   if not wall 
+#       pos[] = [0,1] && exist[1]=true 
 
 
 
