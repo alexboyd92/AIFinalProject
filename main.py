@@ -19,7 +19,7 @@ def setRandomLocations():
 def get_combinations(n, m):
     for flat in product([1, 0], repeat=n*m):
         yield np.reshape(flat, (n, m))
-print ("Select which agent to use \n1)Normal agent \n2)state agent 3\n)random agent")
+print ("Select which agent to use \n1)Normal agent \n2)state agent \n3)random agent")
 try :
     agentSel=int(input())
 except:
@@ -27,7 +27,8 @@ except:
 if agentSel ==1:
     scores = []
     x,y = getUserSizeInput()
-    randomLocations = setRandomLocations()
+    #randomLocations = setRandomLocations()
+    randomLocations = True
     if randomLocations == True:
           # Gets all permutations of matrix
         for m in islice(get_combinations(x, y), None):
