@@ -86,7 +86,7 @@ class SimpleReflexAgent(Environment):
             self.agentAction()
             #print(self.dirtEnv)
             self.cyclesLeft -= 1
-
+            return self.score
         #print(self.score
 class RelfexAgentWithRand(Environment):
         def __init__(self, Evironment, cycles=1000):

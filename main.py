@@ -14,8 +14,7 @@ def getUserSizeInput():
 # sets whether all permutation computation is on or off
 def setRandomLocations():
     print('All Permutations (True or False):')
-    return bool(input())
-
+    return input() 
 def get_combinations(n, m):
     for flat in product([1, 0], repeat=n*m):
         yield np.reshape(flat, (n, m))
@@ -28,7 +27,7 @@ if agentSel ==1:
     scores = []
     x,y = getUserSizeInput()
     randomLocations = setRandomLocations()
-    if randomLocations == True:
+    if randomLocations == "True":
           # Gets all permutations of matrix
         for m in islice(get_combinations(x, y), None):
             #print(m)
@@ -39,6 +38,9 @@ if agentSel ==1:
                     vacuum = SimpleReflexAgent(env)
                     vacuum.setStartingLocation(i, j)
                     scores.append(vacuum.runVacuum())
+        print(scores)
+
+        print('Iterations:', len(scores))
     else:
         env = Environment(x, y)
         print('Environment:')
@@ -46,7 +48,8 @@ if agentSel ==1:
         print('Initial Location:', end=' ')
         vacuum = SimpleReflexAgent(env)
         print('Vacuum Start:\n')
-        score =vacuum.runVacuum()
+        scores =vacuum.runVacuum()
+        print(scores)
 
 
 
@@ -74,6 +77,3 @@ else:
 
 
 
-print(scores)
-print('Iterations:', len(scores))
-print('Average: {:.2f}'.format(sum(scores)/len(scores)))
