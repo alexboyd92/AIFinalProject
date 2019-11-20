@@ -38,9 +38,11 @@ if agentSel ==1:
                     vacuum = SimpleReflexAgent(env)
                     vacuum.setStartingLocation(i, j)
                     scores.append(vacuum.runVacuum())
+                    env.print_shape()
         print(scores)
-
         print('Iterations:', len(scores))
+        print('Average: {:.2f}'.format(sum(scores)/len(scores)))
+
     else:
         env = Environment(x, y)
         print('Environment:')
@@ -50,9 +52,6 @@ if agentSel ==1:
         print('Vacuum Start:\n')
         scores =vacuum.runVacuum()
         print(scores)
-
-
-
 else:
     print ("Select map 1-3")
     mapChoice = int(input())
