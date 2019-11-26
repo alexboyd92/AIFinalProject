@@ -87,38 +87,93 @@ class SimpleReflexAgent(Environment):
             #print(self.dirtEnv)
             self.cyclesLeft -= 1
             return self.score
-        #print(self.score
-class RelfexAgentWithRand(Environment):
+        #print(self.score)
+
+class ReflexAgentWithRand(Environment):
         def __init__(self, Evironment, cycles=1000):
             self.tilesClean=0
             self.cyclesLeft=cycles
-            self.agentLocation = Environment.locationSensor()
+            self.agentLocation = [0,0]
             self.score = 0
-        def moveAgent(self):
-            direction=  random.randrange(1, 4,1)
-            if direction==1:
-                pass
-            if direction ==2:
-                pass
-            if direction ==3:
-                pass
-            if direction ==4:
-                pass
+            self.env = Evironment
+
+        def moveAgent(self, locSensor):
+            self.agentLocation = self.pickLocation(locSensor)
+            print('Moving to:', self.agentLocation)
+        
+        def locationSensor(self):
+            sensorLocationSize = 1
+            tempMap = self.env.enviro
+            try:
+                tempUp = tempMap[self.agentLocation[0]-1][self.agentLocation[1]]
+                tempUploc = [self.agentLocation[0]-1, self.agentLocation[1]]
+            except:
+                tempUp = 2
+                tempUploc = [-1,-1]
+            try:
+                tempRight = tempMap[self.agentLocation[0]][self.agentLocation[1]+1]
+                tempRightLoc = [self.agentLocation[0], self.agentLocation[1]+1]
+            except:
+                tempRight = 2
+                tempRightLoc = [-1,-1]
+            try:
+                tempDown = tempMap[self.agentLocation[0]+1][self.agentLocation[1]]
+                tempDownLoc = [self.agentLocation[0]+1, self.agentLocation[1]]
+            except:
+                tempDown = 2
+                tempDownLoc = [-1,-1]
+            try:
+                tempLeft = tempMap[self.agentLocation[0]][self.agentLocation[1]-1]
+                tempLeftLoc = [self.agentLocation[0], self.agentLocation[1]-1]
+            except:
+                tempLeft = 2
+                tempLeftLoc = [-1,-1]
+
+            return [tempUp, tempUploc, tempRight, tempRightLoc, tempDown, tempDownLoc, tempLeft, tempLeftLoc]
+
+        def pickLocation(self, locSensor):
+            directions = []
+            if ((locSensor[0] != 2) and (-1 not in locSensor[1])):
+                directions.append(locSensor[1])
+            if ((locSensor[2] != 2) and (-1 not in locSensor[3])):
+                directions.append(locSensor[3])
+            if ((locSensor[4] != 2) and (-1 not in locSensor[5])):
+                directions.append(locSensor[5])
+            if ((locSensor[6] != 2) and (-1 not in locSensor[7])):
+                directions.append(locSensor[7])
+            
+            nDirections = len(directions)
+            if nDirections == 0:
+                return self.agentLocation
+            rDir = r.randint(0,nDirections-1)
+
+            return directions[rDir]
+
+
+        def vacuumSuck(self):
+            self.env.enviro[self.agentLocation[0]][self.agentLocation[1]] = 0
+            self.tilesClean += 1
+            self.score += self.tilesClean
 
         def agentAction(self):
-            if self.dirtEnv[self.vacuumLocation[0]][self.vacuumLocation[1]] == 1:
-                                self.suck()
-                                self.tilesClean += 1
+            if self.env.enviro[self.agentLocation[0]][self.agentLocation[1]] == 1:
+                print('Sucking tile:', self.agentLocation)
+                self.vacuumSuck()
+                self.tilesClean += 1
             else:
-                self.moveAgent(1)
+                locSensor = self.locationSensor()
+                self.moveAgent(locSensor)
                 self.score -= 1
 
 
-        def runVacum(self):
+        def runVacuum(self):
             while(self.cyclesLeft != 0):
+                if 1 not in self.env.enviro:
+                    break
                 self.agentAction()
                 self.cyclesLeft -= 1
-                self.score+=tilesClean
+                print(self.env.enviro)
+            return self.score
 
 
 
@@ -128,59 +183,160 @@ class RelfexAgentWithRand(Environment):
 
 class ReflexAgentWithState(Environment):
 
-    def __init__(self, Evironment, cycles=1000):
-        self.state = []
-        self.state = []
-        self.model = []
-        self.rules = []
-        self.lastAction = None
-        self.lastAction = None
-        self.lastAction = None
+    def __init__(self, Environ, cycles=1000):
+        
+        self.lastAction = 0
         self.agentLocation = [0,0]
+        self.tilesClean = 0
         self.score = 0
+        self.cyclesLeft = cycles
+        self.env = Environ
+        self.bump = False
+        self.state = [[0,0]]
+        print(self.env.enviro)
+
 
     def locationSensor(self):
         sensorLocationSize = 1
-        tempMap = Environment.enviro
-        tempCurrent = tempMap[self.agentLocation[0]][self.agentLocation[1]]
-
+        tempMap = self.env.enviro
         try:
             tempUp = tempMap[self.agentLocation[0]-1][self.agentLocation[1]]
+            tempUploc = [self.agentLocation[0]-1, self.agentLocation[1]]
         except:
-            tempUp = None
+            tempUp = 2
+            tempUploc = [-1,-1]
         try:
             tempRight = tempMap[self.agentLocation[0]][self.agentLocation[1]+1]
+            tempRightLoc = [self.agentLocation[0], self.agentLocation[1]+1]
         except:
-            tempRight = None
+            tempRight = 2
+            tempRightLoc = [-1,-1]
         try:
             tempDown = tempMap[self.agentLocation[0]+1][self.agentLocation[1]]
+            tempDownLoc = [self.agentLocation[0]+1, self.agentLocation[1]]
         except:
-            tempDown = None
+            tempDown = 2
+            tempDownLoc = [-1,-1]
         try:
             tempLeft = tempMap[self.agentLocation[0]][self.agentLocation[1]-1]
+            tempLeftLoc = [self.agentLocation[0], self.agentLocation[1]-1]
         except:
-            tempLeft = None
+            tempLeft = 2
+            tempLeftLoc = [-1,-1]
+
+        return [tempUp, tempUploc, tempRight, tempRightLoc, tempDown, tempDownLoc, tempLeft, tempLeftLoc]
 
 
-    #checks if dirt is present at current location
-    def dirtSensor(self, location):
-        dirtPresent = False
-        # checks enviroment map if dirt is equal to 1
-        if Enviroment.enviro[location[0]][location[1]] == 1:
-            dirtPresent = True
-        return dirtPresent
 
     def agentAction(self):
-        if dirtSensor(self.agentLocation) == True:
-            vacuumSuck()
+        # 0 = no movement, 1 = suck, 2 = move up, 3 = move right, 4 = move down, 5 = move left
+        
+        if self.env.enviro[self.agentLocation[0]][self.agentLocation[1]] == 1:
+            self.vacuumSuck()
+            self.lastAction = 1
+        else:
+            #move vacuum
+            if self.bump == True:
+                pass
+            else:
+                locSensor = self.locationSensor()
+                self.moveAgent(locSensor)
+       
 
+    def moveAgent(self, locSensor):
+        #print(locSensor) #Print locSensor radius
+        if locSensor[0] == 1:
+            self.agentLocation[0] = self.agentLocation[0]-1
+            self.lastAction = 2
+            #print('move up1')
+        elif locSensor[2] == 1:
+            self.agentLocation[1] = self.agentLocation[1]+1
+            self.lastAction = 4
+            #print('move right1')
+        elif locSensor[4] == 1:
+            self.agentLocation[0] = self.agentLocation[0]+1
+            self.lastAction = 3
+            #print('move down1')
+        elif locSensor[6] == 1:
+            self.agentLocation[1] = self.agentLocation[1]-1
+            self.lastAction = 5
+            #print('move left1')
+        else:
+            move = False
+            tempLocation = locSensor[1]
+            # move up
+            if (locSensor[0] != 2) and (-1 not in locSensor[1]) and (tempLocation not in self.state) and (move == False):
+                self.agentLocation[0] = self.agentLocation[0]-1
+                self.lastAction = 2
+                move = True
+                #print('move up2')
+
+            tempLocation = locSensor[5]
+            # move down
+            if (locSensor[4] != 2) and (-1 not in locSensor[5]) and (tempLocation not in self.state) and (move == False):
+                self.agentLocation[0] = self.agentLocation[0]+1
+                self.lastAction = 4
+                move = True
+                #print('move down2')
+
+            tempLocation = locSensor[3]
+            #move right
+            if (locSensor[2] != 2) and (-1 not in locSensor[3]) and (tempLocation not in self.state) and (move == False):
+                self.agentLocation[1] = self.agentLocation[1]+1
+                self.lastAction = 3
+                move = True
+                #print('move right2')
+            
+            tempLocation = locSensor[7]
+            # move left
+            if (locSensor[6] != 2) and (-1 not in locSensor[7]) and (tempLocation not in self.state) and (move == False):
+                self.agentLocation[1] = self.agentLocation[1]-1
+                self.lastAction = 5
+                move = True
+                #print('move left2')
+
+            if move == False:
+                if self.lastAction == 2:
+                    self.agentLocation[0] = self.agentLocation[0]+1
+                    self.lastAction = 4
+                    #print('move backwards2')
+
+                elif self.lastAction == 3:
+                    self.agentLocation[1] = self.agentLocation[1]-1
+                    self.lastAction = 5
+                    #print('move backwards3')
+
+                elif self.lastAction == 4:
+                    self.agentLocation[0] = self.agentLocation[0]-1
+                    self.lastAction = 2
+                    #print('move backwards4')
+
+                elif self.lastAction == 5:
+                    self.agentLocation[1] = self.agentLocation[1]+1
+                    self.lastAction = 3
+                    #print('move backwards5')
+            
+                
+        self.score -= 1
+        if self.agentLocation not in self.state:
+            self.state.append(self.agentLocation[:])
 
     def vacuumSuck(self):
-        Environment.enviro[self.agentLocation[0]][self.agentLocation[1]] = 0
-        self.score += 1
+        self.env.enviro[self.agentLocation[0]][self.agentLocation[1]] = 0
+        self.tilesClean += 1
+        self.score += self.tilesClean
 
     def runVacuum(self):
-        return 0
+         while(self.cyclesLeft != 0):
+            if 1 not in self.env.enviro:
+                break
+            self.agentAction()
+            self.cyclesLeft -= 1
+            print(self.env.enviro)
+            #print(self.state)
+            
+            print('Current Location:', self.agentLocation)
+         return self.score
 
 
 

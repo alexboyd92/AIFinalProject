@@ -1,5 +1,5 @@
 from enviroment import Environment
-from agent import SimpleReflexAgent
+from agent import SimpleReflexAgent, ReflexAgentWithState, ReflexAgentWithRand
 from itertools import islice, product, permutations
 import numpy as np
 
@@ -55,22 +55,22 @@ if agentSel ==1:
 else:
     print ("Select map 1-3")
     mapChoice = int(input())
+    env = Environment()
     if mapChoice==1:
-        env = Environment()
         env.setEnviro(Environment.MAP1)
-    if mapChoice==2:
-        env = Environment()
+    elif mapChoice==2:
         env.setEnviro(Environment.MAP2)
-    if mapChoice==3:
-        env = Environment()
+    elif mapChoice==3:
         env.setEnviro(Environment.MAP3)
 
     if agentSel==2:
         agent = ReflexAgentWithState(env)
         score = agent.runVacuum()
-    if agenSel==3:
-        agent = RelfexAgentWithRand(env)
+    if agentSel==3:
+        agent = ReflexAgentWithRand(env)
         score = agent.runVacuum()
+
+    print('Score:', score)
 
 
 
